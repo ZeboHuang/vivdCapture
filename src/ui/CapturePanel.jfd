@@ -44,7 +44,6 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "detailLabel"
-					"text": "text"
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "right"
 				} )

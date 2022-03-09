@@ -37,11 +37,10 @@ public class NetworkCapture {
         }
     }
 
-
+    //数据包到达接受时的操作
     private PacketReceiver packetReceiver = new PacketReceiver() {
         @Override
         public void receivePacket(Packet packet) {
-            //
             capturePanel.addPacket(packet);
         }
     };

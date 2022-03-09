@@ -85,21 +85,28 @@ public class CapturePanel extends JPanel {
         detailLabel = new JLabel();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-        .EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax
-        .swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,
-        12),java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans
-        .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.
-        getPropertyName()))throw new RuntimeException();}});
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+                javax.swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+                .swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java
+                .awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt
+                .Color.red), getBorder()));
+        addPropertyChangeListener(new java.beans.
+                PropertyChangeListener() {
+            @Override
+            public void propertyChange(java.beans.PropertyChangeEvent e) {
+                if ("\u0062ord\u0065r".
+                        equals(e.getPropertyName())) throw new RuntimeException();
+            }
+        });
         setLayout(new MigLayout(
-            "insets 0,hidemode 3,gap 0 0",
-            // columns
-            "[grow,left]",
-            // rows
-            "[fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[]"));
+                "insets 0,hidemode 3,gap 0 0",
+                // columns
+                "[grow,left]",
+                // rows
+                "[fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[]"));
 
         //======== toolBar2 ========
         {
@@ -154,9 +161,6 @@ public class CapturePanel extends JPanel {
                 scrollPane1.setViewportView(packetTable);
             }
             splitPane1.setTopComponent(scrollPane1);
-
-            //---- detailLabel ----
-            detailLabel.setText("text");
             splitPane1.setBottomComponent(detailLabel);
         }
         add(splitPane1, "cell 0 3,aligny top,grow 100 0");
@@ -188,7 +192,6 @@ public class CapturePanel extends JPanel {
         Vector row = new Vector();
 
 
-//        System.out.println("addpackets");
         if (packet instanceof IPPacket) {
             row.add(packetCount);
             row.add(String.format("%.3f s", (float) time / 1000));
@@ -216,12 +219,9 @@ public class CapturePanel extends JPanel {
             row.add(mPacket.dst_ip);
             row.add(ProtocolTransform.transformToString(mPacket.protocol));
             row.add(mPacket.length);
-
-//
             row.add(mPacket.version);       //版本 7
             row.add(mPacket.header.length); //首部长度 8
             row.add(mPacket.data.length);   //数据长度
-
             row.add(mPacket.ident);         //标识 9
             //标志 10
             row.add((mPacket.more_frag == true ? 4 : 0) + (mPacket.dont_frag == true ? 1 : 0));                       //标志 10     //1 4 5 取值
@@ -261,8 +261,8 @@ public class CapturePanel extends JPanel {
         }
 
         if (row.size() > 0) {
-            row.add(packet.header);
-            row.add(packet.data);
+            row.add(getBytes(packet.header));
+            row.add(getBytes(packet.data));
 
             tableModel.addRow(row);
             packetTable.setModel(tableModel);
@@ -270,6 +270,14 @@ public class CapturePanel extends JPanel {
             System.out.println("add success.");
             System.out.println(packet.header.length);
         }
+    }
+
+    private String getBytes(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(bytes[i]);
+        }
+        return sb.toString();
     }
 
     private void initMComponents() {
@@ -326,6 +334,11 @@ public class CapturePanel extends JPanel {
         sb.append("总长度: " + packetTable.getValueAt(clickRow, 5) + "<br/>");
         sb.append("标识: " + packetTable.getValueAt(clickRow, 9) + "<br/>");
         sb.append("标志: " + packetTable.getValueAt(clickRow, 10) + "<br/>");
+        if (packetTable.getValueAt(clickRow, 10).toString().equals("0")) {
+            sb.append("是否有分片: 没有分片<br/>");
+        } else {
+            sb.append("是否有分片: 有分片<br/>");
+        }
         sb.append("片偏移: " + packetTable.getValueAt(clickRow, 11) + "<br/>");
         sb.append("协议: " + packetTable.getValueAt(clickRow, 4) + "<br/>");
         sb.append("源地址: " + packetTable.getValueAt(clickRow, 2) + "<br/>");
