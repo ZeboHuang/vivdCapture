@@ -1,0 +1,59 @@
+JFDML JFormDesigner: "7.0.5.3.411" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "insets 0,hidemode 3,gap 0 0"
+			"$columnConstraints": "[grow,left]"
+			"$rowConstraints": "[fill][fill][fill][]"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JToolBar", new FormLayoutManager( class javax.swing.JToolBar ) ) {
+				name: "toolBar2"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "startBtn"
+					"text": "text"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "startBtnMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "stopBtn"
+					"text": "text"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "stopBtnMouseClicked", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "clearBtn"
+					"text": "text"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "clearBtnMouseClicked", true ) )
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0"
+			} )
+			add( new FormContainer( "javax.swing.JSplitPane", new FormLayoutManager( class javax.swing.JSplitPane ) ) {
+				name: "splitPane1"
+				"orientation": 0
+				"dividerLocation": 200
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "packetTable"
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "packetTableMouseClicked", true ) )
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "left"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "detailLabel"
+					"text": "text"
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "right"
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 3,aligny top,grow 100 0"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

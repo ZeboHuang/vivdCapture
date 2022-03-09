@@ -1,0 +1,51 @@
+JFDML JFormDesigner: "7.0.5.3.411" Java: "11.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp label1:::::x}, seq l {space :p:37:p, par l {comp scrollPane1::l::151:x, seq l {comp label3:::p::p, space :::p, comp label2:::::x}}, space :p::p, par l {comp label4:::p::p, comp startBtn::l::185:x, comp textField1::l::185:x}, space :p:15:p}}, space :p::p}}"
+			"$verticalGroup": "par l {seq l {space :p:14:p, comp label1:::p::p, space u:p::p, par t {comp label2:::p:45:p, comp label3:::p::p, comp label4:::p::p}, space u:p::p, par l {comp scrollPane1::::137:x, seq t {comp textField1:::p::p, space :::x, comp startBtn:::p::p}}, space :p:44:p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "deviceList"
+					"selectionMode": 0
+					addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "deviceListValueChanged", true ) )
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "欢迎!!!"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
+				"horizontalAlignment": 0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "startBtn"
+				"text": "开始"
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "startBtnMouseClicked", true ) )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "startBtnMouseClicked", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "请选择网卡"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "请输入过滤协议或ip"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 5, 0 )
+			"size": new java.awt.Dimension( 400, 295 )
+		} )
+	}
+}

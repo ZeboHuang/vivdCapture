@@ -23,14 +23,15 @@ public class NetworkCapture {
     private Thread gettingPacketThread;
     private boolean isStop;
 
-    public NetworkCapture(NetworkInterface device, CapturePanel capturePanel) {
+    public NetworkCapture(NetworkInterface device, CapturePanel capturePanel, String filterStr) {
         this.device = device;
         this.capturePanel = capturePanel;
         try {
-            jpcapCaptor = JpcapCaptor.openDevice(device, snaplen, false, to_ms);
-            if(capturePanel.getFilterText()!=null){
-                jpcapCaptor.setFilter(capturePanel.getFilterText(), true);
+            jpcapCaptor = JpcapCaptor.openDevice(device, snaplen, promiscCheck, to_ms);
+            if (filterStr != null && !filterStr.isEmpty()) {
+                jpcapCaptor.setFilter(filterStr, true);
             }
+//            jpcapCaptor.setFilter("UDP", true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +55,7 @@ public class NetworkCapture {
             @Override
             public void run() {
                 while (!isStop) {
-                    jpcapCaptor.processPacket(10000, packetReceiver);
+                    jpcapCaptor.processPacket(10, packetReceiver);
 //                    capturePanel.addPacket(jpcapCaptor.getPacket());
                 }
             }
